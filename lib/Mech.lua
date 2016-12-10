@@ -36,14 +36,14 @@ function updateCurtain(dt)
 
 	if curtain_darken then
 		if curtain_alpha > 1 then
-			curtain_alpha = curtain_alpha - dt * 1000
+			curtain_alpha = curtain_alpha - dt * 500
 		else
 			SCENE = next_scene
 			curtain_darken = false
 		end
 	else
 		if curtain_alpha < 255 then
-			curtain_alpha = curtain_alpha + dt * 1000
+			curtain_alpha = curtain_alpha + dt * 500
 		else
 			curtain_darken = true
 			curtain_start  = false

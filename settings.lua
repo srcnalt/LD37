@@ -12,7 +12,7 @@ Scenes = {
 	mind  = 3
 }
 
-ROOM = 0
+ROOM = 1
 
 SCENE = Scenes.intro
 
@@ -41,3 +41,8 @@ KEYS = {
 	skip  = 'space',
 	inv   = 'i'
 }
+
+point = love.mouse.newCursor('img/cursor_1.png',4, 1)
+fist  = love.mouse.newCursor('img/cursor_2.png',4, 1)
+
+lm.setCursor(fist)

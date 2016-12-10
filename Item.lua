@@ -7,6 +7,8 @@ function Item.new(name, img)
 	self.image = img
 	self.name  = name
 	self.hover_img = Image.new('hover', img.x / SCALE, img.y / SCALE)
+	self.selected_img = Image.new('selected', img.x / SCALE, img.y / SCALE)
+	self.is_selected = false
 	return self
 end
 
@@ -15,8 +17,13 @@ function Item:draw()
 end
 
 function Item:hover()
-	if mouse_collision(self.image) then
+	if mouse_collision(self.image) and not self.is_selected then
 		self.hover_img:draw()
 		lg.print(self.name, 380 * SCALE, 140 * SCALE)
 	end
+end
+
+function Item:selected()
+	self.selected_img:draw()
+	self.is_selected = true
 end

@@ -8,13 +8,18 @@ function loadRoom()
 	timer = 0
 
 	talking = false
+	count = true
 end
 
 function updateRoom(dt)
-	timer = timer + dt
+
+	if count then
+		timer = timer + dt * 10
+	end
 
 	if STORY[NOW] == "SWITCH" then
 		talking = false
+		count = false
 		timer = 0
 		NOW = NOW + 1
 		shiftScene(Scenes.mind)

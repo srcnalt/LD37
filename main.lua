@@ -70,8 +70,14 @@ function love.keypressed(key, is_repeated)
 	elseif SCENE == Scenes.menu then
 
 	elseif SCENE == Scenes.room then
-	    controlRoom(key)
-	elseif SCENE == Scenes.mind  then
 
+	elseif SCENE == Scenes.mind  then
+	    controlMind(key)
+	end
+end
+
+function love.mousepressed(x, y, button, istouch)
+   	if SCENE == Scenes.mind  then
+	    controlMind(button)
 	end
 end
