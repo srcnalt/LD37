@@ -15,7 +15,7 @@ function mouse_collision(item)
 end
 
 function char_collision(char)
-	local x = char.x + char.w / 2 * SCALE
+	local x = char.x
 	local y = char.y + char.h
 
 	return y > 100 * SCALE + x / 3 and

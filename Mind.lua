@@ -16,6 +16,8 @@ function loadMind()
 	curr_part = part_1
 
 	curr_cursor = fist
+
+	passed = false
 end
 
 function updateMind(dt)
@@ -53,7 +55,7 @@ function controlMind(key)
 		inv:open()
 	end
 
-	if key == KEYS.skip then
+	if key == KEYS.skip and passed then
 		ROOM = ROOM + 1
 		shiftScene(Scenes.room)
 		loadRoom()
@@ -69,6 +71,8 @@ function controlMind(key)
 				if #inv.combine == 2 then
 					if (inv.combine[1].name == COMBO[ROOM][1] or inv.combine[2].name == COMBO[ROOM][1]) and (inv.combine[1].name == COMBO[ROOM][2] or inv.combine[2].name == COMBO[ROOM][2]) then
 						--show message
+
+						passed = true
 
 						inv.opened = false
 						end_timer = 1

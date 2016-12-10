@@ -1,10 +1,21 @@
 function loadMenu()
-	--rot = 0
-	--brain = Voxel.new('brain', 40, {1,2,3,4,5,6,7,7,7,7})
+	back   = Image.new('menu_back', 0, 0)
+	front  = Image.new('menu_front', 0, 0)
+	bad    = Image.new('bad', 0, 0)
+	sector = Image.new('sector', 0, 0)
 end
 
 function updateMenu(dt)
-	--brain.rot = brain.rot + dt
+	local x, y = lm.getPosition()
+
+	bad.x = 50 + x / 100 * SCALE
+	bad.y = 50 + y / 100 * SCALE
+
+	sector.x = 220 + y / 100 * SCALE
+	sector.y = 345 + x / 100 * SCALE
+
+	front.x = front.x - dt * 1000
+	if front.x < -600 * SCALE then front.x = 0 end
 
 	if lk.isDown(KEYS.skip) then
 		shiftScene(Scenes.room)
@@ -13,5 +24,8 @@ function updateMenu(dt)
 end
 
 function drawMenu()
-	--brain:draw(250, 200, 2)
+	back:draw()
+	front:draw()
+	bad:draw()
+	sector:draw()
 end
