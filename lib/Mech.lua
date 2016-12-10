@@ -9,19 +9,19 @@ function mouse_collision(item)
 	local x, y = lm.getPosition()
 
 	return  x > item.x
-		and x < item.x + item.w * SCALE
+		and x < item.x + item.w
 		and y > item.y
-		and y < item.y + item.h * SCALE
+		and y < item.y + item.h
 end
 
 function char_collision(char)
-	local x = char.x + char.w / 2
+	local x = char.x + char.w / 2 * SCALE
 	local y = char.y + char.h
 
-	return y > 50  * SCALE + x / 3 and
-		   y < 150 * SCALE + x / 3 and
-		   y > 150 * SCALE - x / 3 and
-		   y < 250 * SCALE - x / 3
+	return y > 100 * SCALE + x / 3 and
+		   y < 300 * SCALE + x / 3 and
+		   y > 300 * SCALE - x / 3 and
+		   y < 500 * SCALE - x / 3
 end
 
 function shiftScene(nextScene)

@@ -2,7 +2,7 @@ lg = love.graphics
 lk = love.keyboard
 lm = love.mouse
 
-SCALE = 3
+SCALE = 2
 DEBUG = true
 
 Scenes = {
@@ -12,7 +12,7 @@ Scenes = {
 	mind  = 3
 }
 
-ROOM = 1
+ROOM = 0
 
 SCENE = Scenes.intro
 
@@ -27,7 +27,7 @@ lg = love.graphics
 lk = love.keyboard
 lm = love.mouse
 
-love.window.setMode(300 * SCALE, 200 * SCALE, {fullscreen = false, centered = true})
+love.window.setMode(600 * SCALE, 400 * SCALE, {fullscreen = false, centered = true})
 
 lg.setDefaultFilter('nearest', 'nearest')
 lg.setFont(lg.newFont("fnt/font.ttf", 10 * SCALE))

@@ -9,8 +9,10 @@ function love.load()
 	require 'Intro'
 	require 'Menu'
 	require 'Room'
+	require 'Mind'
 	require 'Inventory'
 	require 'Item'
+	require 'Story'
 
 	if SCENE == Scenes.intro then
 		loadIntro()
@@ -57,6 +59,19 @@ function love.draw()
 	drawCurtain()
 
 	if DEBUG then
+		x, y = love.mouse.getPosition()
+		love.graphics.print(x .. ' ' .. y, 0, 30)
+	end
+end
+
+function love.keypressed(key, is_repeated)
+	if 	   SCENE == Scenes.intro     then
+
+	elseif SCENE == Scenes.menu then
+
+	elseif SCENE == Scenes.room then
+	    controlRoom(key)
+	elseif SCENE == Scenes.mind  then
 
 	end
 end

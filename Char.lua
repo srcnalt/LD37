@@ -7,8 +7,7 @@ function Char.new(w, h, x, y, speed)
 	local idle  = lg.newImage("img/idle.png")
 	local take  = lg.newImage("img/take.png")
 
-	self.image = img
-	self.frame = walk:getWidth() / w
+	self.frame = math.ceil(walk:getWidth() / w)
 	self.walk  = newAnimation(walk, w, h, speed, self.frame)
 	self.idle  = newAnimation(idle, w, h, speed, self.frame)
 	self.take  = newAnimation(take, w, h, speed, self.frame)
@@ -19,6 +18,7 @@ function Char.new(w, h, x, y, speed)
 	self.h 	 = h * SCALE
 	self.s 	 = speed * SCALE
 	self.d 	 = 1
+	self.area= Area.new(w, h, x, y, 'fill')
 	return self
 end
 
@@ -31,6 +31,9 @@ function Char:anim(dt)
 		self.d = 1
 		self.walk:update(dt)
 		self.curr = self.walk
+	elseif lk.isDown(KEYS.up) or lk.isDown(KEYS.down) then
+		self.walk:update(dt)
+		self.curr = self.walk
 	elseif lk.isDown(KEYS.take) then
 		self.take:update(dt)
 		self.curr = self.take
@@ -38,8 +41,15 @@ function Char:anim(dt)
 		self.idle:update(dt)
 		self.curr = self.idle
 	end
+
+	self.area.x = self.x
+	self.area.y = self.y
 end
 
 function Char:draw()
 	self.curr:draw(self.x, self.y, 0, self.d * SCALE, SCALE, self.w / (2 * SCALE))
+
+	if mouse_collision(self.area) then
+		lg.print('yo')
+	end
 end

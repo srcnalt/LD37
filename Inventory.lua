@@ -5,8 +5,8 @@ function Inventory.new()
 	local self = setmetatable({}, Inventory)
 
 	self.item_list = {}
-	self.x = 10
-	self.y = 10
+	self.x = 94
+	self.y = 20
 	self.case = Image.new('inv', self.x, self.y)
 	self.opened = false
 
@@ -18,7 +18,11 @@ function Inventory:addItem(item)
 end
 
 function Inventory:open()
-	self.opened = true
+	if not self.opened then
+		self.opened = true
+	else
+		self.opened = false
+	end
 end
 
 function Inventory:draw()
@@ -27,6 +31,11 @@ function Inventory:draw()
 	self.case:draw()
 
 	for i=1, #self.item_list do
-		self.item_list[i]:drawAt((i - 1) * 50 + 4, 15)
+		self.item_list[i]:draw()
+		self.item_list[i]:hover()
 	end
+
+	love.graphics.print(#self.item_list, 100, 0)
 end
+
+
