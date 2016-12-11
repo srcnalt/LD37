@@ -2,12 +2,12 @@ function loadMind()
 	mind = Image.new('room_3',0,0)
 
 	inv = Inventory.new()
-
 	inv_btn = Image.new('inv_btn', 240, 0)
+	examine = Image.new('examine',0,0)
 
 	part_1 = {
-		{Image.new('slug', 250, 300), 'slug'},
-		{Image.new('pan', 200, 200), 'pan'}
+		{Image.new('slug', 250, 300), 'slug', 'wow a slug, i can eat it!'},
+		{Image.new('pan', 200, 200), 'pan', 'this might be useful'}
 	}
 
 	part_2 = {}
@@ -52,7 +52,19 @@ function drawMind()
     	curr_part[i][1]:draw()
     end
 
-    inv_btn:draw()
+    for i, v in pairs(curr_part) do
+    	if mouse_collision(v[1]) then
+    		local mx = v[1].x + (v[1].w - examine.w) / 2
+    		local my = v[1].y - 60 * SCALE
+    		local padding = 4 * SCALE
+
+    		examine:drawAt(mx, my)
+    		lg.setColor(0,0,0,255)
+    		lg.printf(v[3], mx + padding, my + padding, examine.w - 2 * padding)
+    		lg.setColor(255,255,255,255)
+    	end
+    end
+   inv_btn:draw()
 end
 
 function controlMind(key)
