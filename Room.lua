@@ -14,7 +14,6 @@ function loadRoom()
 end
 
 function updateRoom(dt)
-
 	if count then
 		timer = timer + dt * 10
 	end

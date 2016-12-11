@@ -8,7 +8,6 @@ STORY = {
 	"SWITCH"
 }
 
-
 COMBO = {
 	{'slug', 'pan'}
 }
