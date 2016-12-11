@@ -3,6 +3,8 @@ function loadMind()
 
 	inv = Inventory.new()
 
+	inv_btn = Image.new('inv_btn', 240, 0)
+
 	part_1 = {
 		{Image.new('slug', 250, 300), 'slug'},
 		{Image.new('pan', 200, 200), 'pan'}
@@ -18,6 +20,7 @@ function loadMind()
 	curr_cursor = fist
 
 	passed = false
+	failed = false
 end
 
 function updateMind(dt)
@@ -48,6 +51,8 @@ function drawMind()
     for i=1, #curr_part do
     	curr_part[i][1]:draw()
     end
+
+    inv_btn:draw()
 end
 
 function controlMind(key)
@@ -62,6 +67,14 @@ function controlMind(key)
 	end
 
 	if key == 1 then
+		if mouse_collision(inv_btn) then
+			if inv.opened then
+				inv.opened = false
+			else
+				inv.opened = true
+			end
+		end
+
 		for i, v in pairs(inv.item_list) do
 			if mouse_collision(v.image) then
 				table.insert(inv.combine, v)
@@ -69,16 +82,19 @@ function controlMind(key)
 				--draw as selected
 
 				if #inv.combine == 2 then
-					if (inv.combine[1].name == COMBO[ROOM][1] or inv.combine[2].name == COMBO[ROOM][1]) and (inv.combine[1].name == COMBO[ROOM][2] or inv.combine[2].name == COMBO[ROOM][2]) then
+					if inv.combine[1].name == inv.combine[2].name then 
+						inv.combine = {}
+						v.is_selected = false
+					elseif (inv.combine[1].name == COMBO[ROOM][1] or inv.combine[2].name == COMBO[ROOM][1]) and (inv.combine[1].name == COMBO[ROOM][2] or inv.combine[2].name == COMBO[ROOM][2]) then
 						--show message
 
 						passed = true
-
-						inv.opened = false
 						end_timer = 1
+						failed = false
 					else
 						inv.combine = {}
 						v.is_selected = false
+						failed = true
 					end
 				end
 			end

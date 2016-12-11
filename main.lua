@@ -59,8 +59,7 @@ function love.draw()
 	drawCurtain()
 
 	if DEBUG then
-		x, y = love.mouse.getPosition()
-		love.graphics.print(x .. ' ' .. y, 0, 30)
+
 	end
 end
 
@@ -77,7 +76,9 @@ function love.keypressed(key, is_repeated)
 end
 
 function love.mousepressed(x, y, button, istouch)
-   	if SCENE == Scenes.mind  then
+	if SCENE == Scenes.room then
+		controlRoom(button)
+   	elseif SCENE == Scenes.mind  then
 	    controlMind(button)
 	end
 end

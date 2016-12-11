@@ -23,15 +23,15 @@ function Char.new(w, h, x, y, speed)
 end
 
 function Char:anim(dt)
-	if lk.isDown(KEYS.left) then
+	if lk.isDown(KEYS.left) or lk.isDown(KEYS.left2) then
 		self.d = -1
 		self.walk:update(dt)
 		self.curr = self.walk
-	elseif lk.isDown(KEYS.right) then
+	elseif lk.isDown(KEYS.right) or lk.isDown(KEYS.right2) then
 		self.d = 1
 		self.walk:update(dt)
 		self.curr = self.walk
-	elseif lk.isDown(KEYS.up) or lk.isDown(KEYS.down) then
+	elseif lk.isDown(KEYS.up) or lk.isDown(KEYS.down) or lk.isDown(KEYS.up2) or lk.isDown(KEYS.down2) then
 		self.walk:update(dt)
 		self.curr = self.walk
 	elseif lk.isDown(KEYS.take) then
@@ -48,8 +48,4 @@ end
 
 function Char:draw()
 	self.curr:draw(self.x, self.y, 0, self.d * SCALE, SCALE, self.w / (2 * SCALE))
-
-	if mouse_collision(self.area) then
-		lg.print('yo')
-	end
 end

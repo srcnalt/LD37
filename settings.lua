@@ -34,9 +34,13 @@ lg.setFont(lg.newFont("fnt/font.ttf", 10 * SCALE))
 
 KEYS = {
 	right = 'd',
+	right2= 'right',
 	left  = 'a',
+	left2 = 'left',
 	up    = 'w',
+	up2   = 'up',
 	down  = 's',
+	down2 = 'down',
 	take  = 'e',
 	skip  = 'space',
 	inv   = 'i'

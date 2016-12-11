@@ -9,6 +9,8 @@ function loadRoom()
 
 	talking = false
 	count = true
+
+	skip_btn = Image.new('skip_btn', 240, 376)
 end
 
 function updateRoom(dt)
@@ -39,19 +41,19 @@ function updateRoom(dt)
 	last_pos.x = char.x
 	last_pos.y = char.y
 
-    if lk.isDown(KEYS.up) then
+    if lk.isDown(KEYS.up) or lk.isDown(KEYS.up2) then
 		char.y = char.y - dt * speed * SCALE
 	end
 
-	if lk.isDown(KEYS.down) then 
+	if lk.isDown(KEYS.down) or lk.isDown(KEYS.down2) then 
 		char.y = char.y + dt * speed * SCALE
 	end
 
-	if lk.isDown(KEYS.left) then 
+	if lk.isDown(KEYS.left) or lk.isDown(KEYS.left2) then 
 		char.x = char.x - dt * speed * SCALE
 	end
 
-	if lk.isDown(KEYS.right) then 
+	if lk.isDown(KEYS.right) or lk.isDown(KEYS.right2) then 
 		char.x = char.x + dt * speed * SCALE
 	end
 
@@ -71,4 +73,14 @@ function drawRoom()
     	lg.rectangle("fill", char.x - 70 * SCALE, char.y - 50 * SCALE, 150 * SCALE, 40 * SCALE, 10)
     	lg.printf({{0, 0, 0}, STORY[NOW]}, char.x - 68 * SCALE, char.y - 48 * SCALE, 148 * SCALE, "left")
     end
+
+    skip_btn:draw()
+end
+
+function controlRoom(key)
+	if key == 1 and mouse_collision(skip_btn) then
+		talking = false
+		timer = 0
+		NOW = NOW + 1
+	end
 end

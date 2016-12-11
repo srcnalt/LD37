@@ -39,6 +39,18 @@ function Inventory:draw()
 		self.item_list[i]:draw()
 		self.item_list[i]:hover()
 	end
+
+	if #self.item_list == 0 then
+		lg.print("I have to find some clues...", 115 * SCALE, 105 * SCALE)
+	elseif #self.item_list == 1 then
+		lg.print("I have to find some other items...", 115 * SCALE, 105 * SCALE)
+	elseif not passed and not failed then
+		lg.print("I have to combine these items to help me remember...", 115 * SCALE, 105 * SCALE)
+	elseif failed then
+		lg.print("This combination did not work, have to try something else...", 115 * SCALE, 105 * SCALE)
+	elseif passed and MESSAGE[ROOM] then
+		lg.print(MESSAGE[ROOM], 115 * SCALE, 105 * SCALE)
+	end
 end
 
 
