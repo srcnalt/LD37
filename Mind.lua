@@ -103,6 +103,7 @@ function controlMind(key)
 						passed = true
 						end_timer = 1
 						failed = false
+						room_stage = room_stage + 1
 					else
 						inv.combine = {}
 						v.is_selected = false
