@@ -1,6 +1,6 @@
 function loadRoom()
 	room = Image.new('room_'..ROOM,0,0)
-	char = Char.new(45, 143, 290, 150, 0.2)
+	char = Char.new(128, 128, 290, 150, 0.2)
 	speed = 30 * SCALE
 
 	last_pos = {x = 0, y = 0}
@@ -13,10 +13,14 @@ function loadRoom()
 	anim_end = 0
 
 	skip_btn = Image.new('skip_btn', 240, 376)
+
+	loop2:play()
 end
 
 function updateRoom(dt)
 	if ROOM > 3 then
+		loop2:stop()
+		loop:play()
 		walk(dt)
 	elseif room_stage == 0 then
 		if count then
@@ -149,8 +153,8 @@ function walk(dt)
 		mind_stage = 1
 		ROOM = 1
 
-		loadCredits()
 		shiftScene(Scenes.credits)
+		loadCredits()
 	end
 
 	if timer > 1 then

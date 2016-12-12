@@ -4,6 +4,10 @@ function loadMenu()
 	bad    = Image.new('menu/bad', 0, 0)
 	sector = Image.new('menu/sector', 0, 0)
 	st 	   = Image.new('menu/st', 0, 350)
+
+	loop = love.audio.newSource('snd/loop.ogg')
+	loop2 = love.audio.newSource('snd/loop2.ogg')
+	loop:play()
 end
 
 function updateMenu(dt)
@@ -19,6 +23,7 @@ function updateMenu(dt)
 	if front.x < -600 * SCALE then front.x = 0 end
 
 	if lk.isDown(KEYS.skip) then
+		loop:stop()
 		shiftScene(Scenes.room)
 		loadRoom()
 	end

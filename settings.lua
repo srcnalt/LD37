@@ -15,7 +15,7 @@ Scenes = {
 
 ROOM = 1
 
-SCENE = Scenes.credits
+SCENE = Scenes.menu
 
 next_scene = Scenes.intro
 curtain = lg.newImage('img/curtain.png')

@@ -7,13 +7,18 @@ function Char.new(w, h, x, y, speed)
 	local idle  = lg.newImage("img/char/idle.png")
 	local fall  = lg.newImage("img/char/fall.png")
 	local rise  = lg.newImage("img/char/rise.png")
+	local goup  = lg.newImage("img/char/goup.png")
+	local godw  = lg.newImage("img/char/godw.png")
 
-	self.frame = math.ceil(walk:getWidth() / w)
-	self.walk  = newAnimation(walk, 43, h, speed, self.frame)
+	self.frame = 4
+	self.walk  = newAnimation(walk, w, h, speed, self.frame)
 	self.idle  = newAnimation(idle, w, h, speed, self.frame)
-	self.fall  = newAnimation(fall, 150, 133, 0.2, 3)
+	self.fall  = newAnimation(fall, w, h, 0.2, self.frame)
 	self.fall:setMode('once')
-	self.rise  = newAnimation(rise, 150, 130, 0.2, 8)
+	self.rise  = newAnimation(rise, w, h, 0.2, 8)
+	self.goup  = newAnimation(goup, w, h, speed, self.frame)
+	self.godw  = newAnimation(godw, w, h, speed, self.frame)
+
 
 	self.curr  = self.rise
 	self.x 	 = x * SCALE
@@ -43,12 +48,12 @@ function Char:anim(dt)
 			self.d = 1
 			self.walk:update(dt)
 			self.curr = self.walk
-		elseif lk.isDown(KEYS.up) or lk.isDown(KEYS.down) or lk.isDown(KEYS.up2) or lk.isDown(KEYS.down2) then
-			self.walk:update(dt)
-			self.curr = self.walk
-		elseif lk.isDown(KEYS.take) then
-			self.take:update(dt)
-			self.curr = self.take
+		elseif lk.isDown(KEYS.up) or lk.isDown(KEYS.up2) then
+			self.goup:update(dt)
+			self.curr = self.goup
+		elseif lk.isDown(KEYS.down) or lk.isDown(KEYS.down2) then
+			self.godw:update(dt)
+			self.curr = self.godw
 		else
 			self.idle:update(dt)
 			self.curr = self.idle
