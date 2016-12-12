@@ -13,6 +13,7 @@ function love.load()
 	require 'Inventory'
 	require 'Item'
 	require 'Story'
+	require 'Credits'
 
 	if SCENE == Scenes.intro then
 		loadIntro()
@@ -36,7 +37,7 @@ function love.update(dt)
 		updateRoom(dt)
 	elseif SCENE == Scenes.mind then
 		updateMind(dt)
-	else
+	elseif SCENE == Scenes.credits then
 		updateCredits(dt)
 	end
 
@@ -52,7 +53,7 @@ function love.draw()
 		drawRoom()
 	elseif SCENE == Scenes.mind then
 		drawMind()
-	else
+	elseif SCENE == Scenes.credits then
 		drawCredits()
 	end
 

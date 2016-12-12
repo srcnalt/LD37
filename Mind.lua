@@ -6,7 +6,7 @@ function loadMind()
 
 	anim = {
 		{
-			{newAnimation(lg.newImage("img/old_room/tent1.png"), 256, 140, 1, 2), {x=0,y=0}},
+			{newAnimation(lg.newImage("img/old_room/tent1.png"), 256, 140, 1, 2), 	{x=0,y=0}},
 			{newAnimation(lg.newImage("img/old_room/tent2.png"), 520, 88, 0.5, 4),  {x=0,y=312}},
 		},
 		{
@@ -39,6 +39,7 @@ function loadMind()
 
 	passed = false
 	failed = false
+	invcln = false
 end
 
 function updateMind(dt)
@@ -67,6 +68,12 @@ function updateMind(dt)
 end
 
 function drawMind()
+	if ROOM > 3 then
+		shiftScene(Scenes.room)
+		loadRoom()
+		return
+	end
+
 	mind[mind_stage]:draw()
 
     for i, v in ipairs(items[mind_stage]) do
@@ -103,6 +110,8 @@ function controlMind(key)
 	if key == KEYS.skip and passed then
 		ROOM = ROOM + 1
 		NOW = NOW + 1
+		invcln = true
+		passed = false
 		shiftScene(Scenes.room)
 		loadRoom()
 	end
@@ -129,7 +138,6 @@ function controlMind(key)
 						end_timer = 1
 						failed = false
 						room_stage = room_stage + 1
-						NOW = NOW + 1
 
 						for i,v in ipairs(inv.item_list) do
 							v.is_selected = false

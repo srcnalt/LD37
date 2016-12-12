@@ -3,6 +3,7 @@ function loadMenu()
 	front  = Image.new('menu/menu_front', 0, 0)
 	bad    = Image.new('menu/bad', 0, 0)
 	sector = Image.new('menu/sector', 0, 0)
+	st 	   = Image.new('menu/st', 0, 350)
 end
 
 function updateMenu(dt)
@@ -28,4 +29,5 @@ function drawMenu()
 	front:draw()
 	bad:draw()
 	sector:draw()
+	st:draw()
 end

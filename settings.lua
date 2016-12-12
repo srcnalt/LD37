@@ -6,16 +6,16 @@ SCALE = 2
 DEBUG = true
 
 Scenes = {
-	intro = 0,
-	menu  = 1,
-	room  = 2,
-	mind  = 3,
-	cred  = 4
+	intro 	= 0,
+	menu  	= 1,
+	room  	= 2,
+	mind  	= 3,
+	credits = 4
 }
 
 ROOM = 1
 
-SCENE = Scenes.intro
+SCENE = Scenes.credits
 
 next_scene = Scenes.intro
 curtain = lg.newImage('img/curtain.png')

@@ -40,6 +40,8 @@ function Inventory:draw()
 		self.item_list[i]:hover()
 	end
 
+	if invcln then return end
+
 	if #self.item_list == 0 then
 		lg.print("I have to find some clues...", 115 * SCALE, 105 * SCALE)
 	elseif #self.item_list == 1 then
