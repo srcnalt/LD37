@@ -9,7 +9,8 @@ Scenes = {
 	intro = 0,
 	menu  = 1,
 	room  = 2,
-	mind  = 3
+	mind  = 3,
+	cred  = 4
 }
 
 ROOM = 1

@@ -1,13 +1,16 @@
 function loadMind()
 	mind = {
 		Image.new('old_room/room',0,0),
-		Image.new('room_3',0,0)
+		Image.new('sci_room/room',0,0)
 	}
 
 	anim = {
 		{
 			{newAnimation(lg.newImage("img/old_room/tent1.png"), 256, 140, 1, 2), {x=0,y=0}},
 			{newAnimation(lg.newImage("img/old_room/tent2.png"), 520, 88, 0.5, 4),  {x=0,y=312}},
+		},
+		{
+
 		}
 	}
 
@@ -15,19 +18,22 @@ function loadMind()
 	inv_btn = Image.new('inv_btn', 240, 0)
 	examine = Image.new('examine',0,0)
 
-	part_1 = {
-		{Image.new('old_room/glasses', 242, 156), 'Glasses',  "Looks like it's designed for women."},
-		{Image.new('old_room/suit',    290, 270), 'Suit', "The suit looks quite old and dusty. Looks like hasn't been touched in a long time."},
-		{Image.new('old_room/picture', 262, 108), 'Picture', "It's a picture of an old woman."},
-		{Image.new('old_room/leaf',    515, 180), 'Plant', "This plant is alive, someone has been looking after it."}
+	items = {
+		{		
+			{Image.new('old_room/glasses', 242, 156), 'Glasses',  	"Looks like it's designed for women."},
+			{Image.new('old_room/suit',    290, 270), 'Suit', 		"The suit looks quite old and dusty. Looks like hasn't been touched in a long time."},
+			{Image.new('old_room/picture', 262, 108), 'Picture', 	"It's a picture of an old man."},
+			{Image.new('old_room/leaf',    515, 180), 'Plant', 		"This plant is alive, someone has been looking after it."}
+		},
+		{
+			{Image.new('sci_room/screw',   313, 295), 'Screw Driver', 	"There is something in the drawer."},
+			{Image.new('sci_room/circuit', 100, 187), 'Circuit Board', 	"Someone tried to hack this door from inside... But failed... Who?"},
+			{Image.new('sci_room/paper',   383, 244), 'Paper', 			"Paper full of ones and zeros... Somehow I feel like I understand this text."},
+			{Image.new('sci_room/cable',   256, 208), 'Pile of Cable', 	"Pile of elektrical cable. It has some sort of weird socket on it."},
+		}
 	}
 
-	part_2 = {}
-	part_3 = {}
-
 	combination = {}
-
-	curr_part = part_1
 
 	curr_cursor = fist
 
@@ -38,7 +44,7 @@ end
 function updateMind(dt)
 	curr_cursor = fist
 
-	for i, v in ipairs(curr_part) do
+	for i, v in ipairs(items[mind_stage]) do
 		if mouse_collision(v[1]) then
 			curr_cursor = point
 
@@ -48,7 +54,7 @@ function updateMind(dt)
 
 				inv:addItem(Item.new(v[2], Image.new(v[1].name..'2', v[1].x / SCALE, v[1].y / SCALE)))
 
-				table.remove(curr_part, i)
+				table.remove(items[mind_stage], i)
 			end
 		end
 	end
@@ -63,15 +69,15 @@ end
 function drawMind()
 	mind[mind_stage]:draw()
 
-    for i=1, #curr_part do
-    	curr_part[i][1]:draw()
+    for i, v in ipairs(items[mind_stage]) do
+    	v[1]:draw()
     end
 
     for i,v in ipairs(anim[mind_stage]) do
     	v[1]:draw(v[2].x * SCALE, v[2].y * SCALE, 0, SCALE, SCALE)
     end
 
-    for i, v in pairs(curr_part) do
+    for i, v in pairs(items[mind_stage]) do
     	if mouse_collision(v[1]) then
     		local mx = v[1].x + (v[1].w - examine.w) / 2
     		local my = v[1].y - 60 * SCALE
@@ -96,6 +102,7 @@ function controlMind(key)
 
 	if key == KEYS.skip and passed then
 		ROOM = ROOM + 1
+		NOW = NOW + 1
 		shiftScene(Scenes.room)
 		loadRoom()
 	end
@@ -113,8 +120,6 @@ function controlMind(key)
 			if mouse_collision(v.image) then
 				table.insert(inv.combine, v)
 
-				--draw as selected
-
 				if #inv.combine == 2 then
 					if inv.combine[1].name == inv.combine[2].name then 
 						inv.combine = {}
@@ -124,7 +129,7 @@ function controlMind(key)
 						end_timer = 1
 						failed = false
 						room_stage = room_stage + 1
-						NOW = NOW + 2
+						NOW = NOW + 1
 
 						for i,v in ipairs(inv.item_list) do
 							v.is_selected = false

@@ -3,12 +3,21 @@ NOW = 1
 STORY = {
 	"Maybe I use W A S D keys to walk around...",
 	"STOP",
-	"Hey",
-	"STOP"
+	"Did I know that man?",
+	"I feel like I have been to that place before...",
+	"..oh wailt...",
+	"I do remember something!",
+	"SWITCH",
+	"This hack device...",
+	"Maybe I can connect to it through the socket on my back.",
+	"I don't think I should do this... It may kill me.",
+	"I don't even know, even know if I'm alive. Nothing seems real.",
+	"This will help me meet my reality.."
 }
 
 COMBO = {
-	{'Glasses', 'Picture'}
+	{'Glasses', 'Picture'},
+	{'Circuit Board', 'Pile of Cable'}
 }
 
 MESSAGE = {

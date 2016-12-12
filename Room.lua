@@ -84,34 +84,6 @@ function controlRoom(key)
 end
 
 function walk(dt)
-	if count then
-		timer = timer + dt
-	end
-
-	if STORY[NOW] == "SWITCH" then
-		talking = false
-		count = false
-		timer = 0
-		NOW = NOW + 1
-		shiftScene(Scenes.mind)
-		loadMind()
-	elseif STORY[NOW] == "STOP" then
-		talking = false
-		count = false
-		timer = 0
-		NOW = NOW + 1
-	end
-
-	if timer > 1 then
-		talking = true
-	end
-
-	if lk.isDown(KEYS.skip) and talking then
-		talking = false
-		timer = 0
-		NOW = NOW + 1
-	end
-
 	last_pos.x = char.x
 	last_pos.y = char.y
 
@@ -134,5 +106,36 @@ function walk(dt)
 	if not char_collision(char) then
 		char.x = last_pos.x
 		char.y = last_pos.y
+	end
+
+	if count then
+		timer = timer + dt
+	end
+
+	if NOW > #STORY then return end
+
+	if STORY[NOW] == "SWITCH" then
+		talking = false
+		count = false
+		timer = 0
+		NOW = NOW + 1
+		mind_stage = mind_stage + 1
+		
+		shiftScene(Scenes.mind)
+		loadMind()
+	elseif STORY[NOW] == "STOP" then
+		talking = false
+		count = false
+		timer = 0
+	end
+
+	if timer > 1 then
+		talking = true
+	end
+
+	if lk.isDown(KEYS.skip) and talking then
+		talking = false
+		timer = 0
+		NOW = NOW + 1
 	end
 end
