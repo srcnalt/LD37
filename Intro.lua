@@ -1,5 +1,5 @@
 function loadIntro()
-	intro_back = Image.new('intro_back',0,0)
+	intro_back = Image.new('menu/intro_back',0,0)
 end
 
 function updateIntro(dt)

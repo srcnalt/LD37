@@ -72,11 +72,11 @@ function drawRoom()
 
     skip_btn:draw()
 
-    lg.print(anim_end)
+    lg.print(NOW)
 end
 
 function controlRoom(key)
-	if key == 1 and mouse_collision(skip_btn) then
+	if key == 1 and mouse_collision(skip_btn) and talking then
 		talking = false
 		timer = 0
 		NOW = NOW + 1

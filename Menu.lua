@@ -1,8 +1,8 @@
 function loadMenu()
-	back   = Image.new('menu_back', 0, 0)
-	front  = Image.new('menu_front', 0, 0)
-	bad    = Image.new('bad', 0, 0)
-	sector = Image.new('sector', 0, 0)
+	back   = Image.new('menu/menu_back', 0, 0)
+	front  = Image.new('menu/menu_front', 0, 0)
+	bad    = Image.new('menu/bad', 0, 0)
+	sector = Image.new('menu/sector', 0, 0)
 end
 
 function updateMenu(dt)

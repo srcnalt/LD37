@@ -1,13 +1,25 @@
 function loadMind()
-	mind = Image.new('room_3',0,0)
+	mind = {
+		Image.new('old_room/room',0,0),
+		Image.new('room_3',0,0)
+	}
+
+	anim = {
+		{
+			{newAnimation(lg.newImage("img/old_room/tent1.png"), 256, 140, 1, 2), {x=0,y=0}},
+			{newAnimation(lg.newImage("img/old_room/tent2.png"), 520, 88, 0.5, 4),  {x=0,y=312}},
+		}
+	}
 
 	inv = Inventory.new()
 	inv_btn = Image.new('inv_btn', 240, 0)
 	examine = Image.new('examine',0,0)
 
 	part_1 = {
-		{Image.new('slug', 250, 300), 'slug', 'wow a slug, i can eat it!'},
-		{Image.new('pan', 200, 200), 'pan', 'this might be useful'}
+		{Image.new('old_room/glasses', 242, 156), 'Glasses',  "Looks like it's designed for women."},
+		{Image.new('old_room/suit',    290, 270), 'Suit', "The suit looks quite old and dusty. Looks like hasn't been touched in a long time."},
+		{Image.new('old_room/picture', 262, 108), 'Picture', "It's a picture of an old woman."},
+		{Image.new('old_room/leaf',    515, 180), 'Plant', "This plant is alive, someone has been looking after it."}
 	}
 
 	part_2 = {}
@@ -34,22 +46,29 @@ function updateMind(dt)
 				v[1].x = (#inv.item_list * 66 + 106) * SCALE
 				v[1].y = 32 * SCALE
 
-				inv:addItem(Item.new(v[2], v[1]))
+				inv:addItem(Item.new(v[2], Image.new(v[1].name..'2', v[1].x / SCALE, v[1].y / SCALE)))
 
 				table.remove(curr_part, i)
 			end
 		end
 	end
 
+	for i,v in ipairs(anim[mind_stage]) do
+		v[1]:update(dt)
+	end
+
 	lm.setCursor(curr_cursor)
 end
 
 function drawMind()
-	mind:draw()
-    inv:draw()
+	mind[mind_stage]:draw()
 
     for i=1, #curr_part do
     	curr_part[i][1]:draw()
+    end
+
+    for i,v in ipairs(anim[mind_stage]) do
+    	v[1]:draw(v[2].x * SCALE, v[2].y * SCALE, 0, SCALE, SCALE)
     end
 
     for i, v in pairs(curr_part) do
@@ -64,7 +83,10 @@ function drawMind()
     		lg.setColor(255,255,255,255)
     	end
     end
-   inv_btn:draw()
+
+    inv:draw()
+
+    inv_btn:draw()
 end
 
 function controlMind(key)
@@ -98,15 +120,22 @@ function controlMind(key)
 						inv.combine = {}
 						v.is_selected = false
 					elseif (inv.combine[1].name == COMBO[ROOM][1] or inv.combine[2].name == COMBO[ROOM][1]) and (inv.combine[1].name == COMBO[ROOM][2] or inv.combine[2].name == COMBO[ROOM][2]) then
-						--show message
-
 						passed = true
 						end_timer = 1
 						failed = false
 						room_stage = room_stage + 1
+						NOW = NOW + 2
+
+						for i,v in ipairs(inv.item_list) do
+							v.is_selected = false
+						end
 					else
 						inv.combine = {}
-						v.is_selected = false
+
+						for i,v in ipairs(inv.item_list) do
+							v.is_selected = false
+						end
+						
 						failed = true
 					end
 				end

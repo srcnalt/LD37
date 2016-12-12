@@ -4,7 +4,8 @@ Image.__index = Image
 function Image.new(name, x, y)
   local self = setmetatable({}, Image)
   local img  = lg.newImage("img/" .. name .. ".png")
-
+  
+  self.name = name
   self.image = img
   self.x 	 = x * SCALE
   self.y 	 = y * SCALE

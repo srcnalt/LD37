@@ -17,7 +17,7 @@ function Item:draw()
 end
 
 function Item:hover()
-	if mouse_collision(self.image) and not self.is_selected then
+	if mouse_collision(self.image) and not self.is_selected and not passed then
 		self.hover_img:draw()
 		lg.print(self.name, 380 * SCALE, 140 * SCALE)
 	end
